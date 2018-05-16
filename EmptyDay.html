@@ -1,0 +1,1894 @@
+<!DOCTYPE HTML>
+<?php $room = $_GET['room']; 
+echo $room;
+?>
+<html>
+<script>
+	function validate(){
+		var time = document.getElementById('time');
+		
+		if(time.value == "notime"){
+			alert("Please select a time");
+			return false;
+		}
+	}
+	</script>
+	
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour</title>
+    <link rel="stylesheet" href="https://cdn.pannellum.org/2.3/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.pannellum.org/2.3/pannellum.js"></script>
+    <style>
+		body {
+				background-image:url("/images/darkness.png")
+			}
+		#panorama {
+			margin: auto;
+			height:95vh; 
+			width:80vw;
+		}
+		
+    </style>
+</head>
+<body>
+<center><img src="/images/title.png" alt="Mercer University" width="360px" height="90px"><center>
+<center><form action="/start_finder.php" target="_self" method="get" onsubmit="return validate()">
+			<select name="time" id="time">
+				<option value="notime" selected>
+					Select an Environment
+				</option>
+				<option value="day">
+					Populated Day
+				</option>
+				<option value="night">
+					Empty Night
+				</option>
+			</select><br><br>
+			<input type="submit">
+		</form></center><br>
+		<form action="/DayTour.php" target="_self" method="get" >
+			<select name="room" id="room">
+				<option value="nofloor" selected>
+					Select a Floor
+				</option>
+				<option value="FirstFloorHallway">
+					1st
+				</option>
+				<option value="OutsideMainEntrance">
+					2nd
+				</option>
+				<option value="MiddleThirdFloor">
+					3rd
+				</option>
+			</select><br><br>
+			<input type="submit">
+		</form>
+
+<div id="panorama"></div>
+<div id="demo"></div>
+
+<script>
+var room = "<?php echo $_GET['room']; ?>"
+document.getElementById("demo").innerHTML = room.value;
+pannellum.viewer('panorama', {   
+    "default": {
+        "firstScene": "OutsideMainEntrance",
+        "author": "CSC 480",
+        "sceneFadeDuration": 1000,
+		"autoLoad": true
+    },
+
+    "scenes": {
+		"OutsideMainEntrance": {
+            "title": "Start of the tour",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 180,
+            "type": "equirectangular",
+            "panorama": "/images/OutsideMainEntrance.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"type": "scene",
+                    "text": "Entrance",
+                    "sceneId": "Entrance"
+                }, 
+				{
+                    "pitch": -1.0,
+                    "yaw": 130.0,
+					"type": "scene",
+                    "text": "LeftofMainEntrance",
+                    "sceneId": "LeftofMainEntrance"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 250.0,
+					"type": "scene",
+                    "text": "RightofMainEntrance",
+                    "sceneId": "RightofMainEntrance"
+                }
+            ]
+        },
+		"LeftofMainEntrance": {
+            "title": "Left of the main entrance",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 180,
+            "type": "equirectangular",
+            "panorama": "/images/LeftofMainEntrance.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 355.0,
+					"targetYaw": 280.0,
+					"type": "scene",
+                    "text": "OutsideMainEntrance",
+                    "sceneId": "OutsideMainEntrance"
+					
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"type": "scene",
+                    "text": "OutsideNearStairs",
+                    "sceneId": "OutsideNearStairs"
+                }
+            ]
+        },
+		"RightofMainEntrance": {
+            "title": "Right of the main entrance",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 180,
+            "type": "equirectangular",
+            "panorama": "/images/RightofMainEntrance.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 50.0,
+					"targetYaw": 90.0,
+					"type": "scene",
+                    "text": "OutsideMainEntrance",
+                    "sceneId": "OutsideMainEntrance"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 220.0,
+					"type": "scene",
+                    "text": "BottomofFrontRamp",
+                    "sceneId": "BottomofFrontRamp"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 155.0,
+					"targetYaw": 180.0,
+					"type": "scene",
+                    "text": "OutsideDoorRamp",
+                    "sceneId": "OutsideDoorRamp"
+                }
+            ]
+        },
+		"BottomofFrontRamp": {
+            "title": "Right of the main entrance",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 180,
+            "type": "equirectangular",
+            "panorama": "/images/BottomofFrontRamp.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 20.0,
+					"targetYaw": 70.0,
+					"type": "scene",
+                    "text": "RightofMainEntrance",
+                    "sceneId": "RightofMainEntrance"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 38.0,
+					"targetYaw": 90.0,
+					"type": "scene",
+                    "text": "OutsideDoorRamp",
+                    "sceneId": "OutsideDoorRamp"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 175.0,
+					"targetYaw": 180.0,
+					"type": "scene",
+                    "text": "BackRightCorner",
+                    "sceneId": "BackRightCorner"
+                }
+            ]
+        },
+		"OutsideNearStairs": {
+            "title": "OutsideNearStairs",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 180,
+            "type": "equirectangular",
+            "panorama": "/images/OutsideNearStairs.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 8.0,
+					"targetYaw": 0.0,
+					"type": "scene",
+                    "text": "LeftofMainEntrance",
+                    "sceneId": "LeftofMainEntrance"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"type": "scene",
+                    "text": "FrontLeftCorner",
+                    "sceneId": "FrontLeftCorner"
+                },
+				{
+                    "pitch": -10.0,
+                    "yaw": 290.0,
+					"type": "scene",
+                    "text": "BottomOutsideStairs",
+                    "sceneId": "BottomofOutsideStairs"
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 230.0,
+					"targetYaw": 0.0,
+					"type": "scene",
+                    "text": "SecretPath",
+                    "sceneId": "SecretPath"
+                }
+            ]
+        },
+        "Entrance": {
+            "title": "CSB Entrance Day",
+            "hfov": 110,
+            "pitch": 0,
+            "yaw": 90,
+            "type": "equirectangular",
+            "panorama": "/images/Entrance1.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": -988.0,
+					"targetYaw": 90.0,
+                    "type": "scene",
+                    "text": "CSB Offices",
+                    "sceneId": "CSOfficeStart"
+                },
+                {
+                    "pitch": -1.0,
+                    "yaw": -912.0,
+                    "type": "scene",
+                    "text": "Stairway",
+                    "sceneId": "LittleStairway"
+                },
+				{
+                    "pitch": -3.0,
+                    "yaw": 260.0,
+					"targetYaw": 20.0,
+                    "type": "scene",
+                    "text": "Outside Main Entrance",
+                    "sceneId": "OutsideMainEntrance"
+                },
+				{
+					"pitch": -1.0,
+                    "yaw": 0.0,
+					"targetYaw": 270,
+                    "type": "scene",
+                    "text": "Hallway",
+                    "sceneId": "OutsideCynthiaOffice"
+                }
+            ]
+        },
+		"OutsideCynthiaOffice": {
+            "title": "Hallway",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/OutsideCynthiaOffice.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 265.0,
+					"targetYaw": 190.0,
+                    "type": "scene",
+                    "text": "End Hallway",
+                    "sceneId": "EndEntranceHall"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 170.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Dr. Robertson's Office",
+                    "sceneId": "CynthiaOffice"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 90.0,
+					"targetYaw": 180.0,
+                    "type": "scene",
+                    "text": "CSB Entrance",
+                    "sceneId": "Entrance"
+                },
+            ]
+        },
+		"CynthiaOffice": {
+            "title": "Dr. Robertson's Office",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/CynthiaOffice.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 155.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Hallway",
+                    "sceneId": "OutsideCynthiaOffice"
+                }
+            ]
+        },
+
+	 "EndEntranceHall": {
+            "title": "CSB Hallway",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/EndEntranceHall.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 10.0,
+					"targetYaw": 90.0,
+                    "type": "scene",
+                    "text": "Hallway",
+                    "sceneId": "OutsideCynthiaOffice"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"targetYaw": 270.0,
+                    "type": "scene",
+                    "text": "Stairway",
+                    "sceneId": "LeftStairway"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 192.0,
+					"targetYaw": 90.0,
+                    "type": "scene",
+                    "text": "Lab 204",
+                    "sceneId": "Lab204Back"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 80.0,
+					"targetYaw": 20.0,
+                    "type": "scene",
+                    "text": "Dr. Pounds' Office",
+                    "sceneId": "DrPoundsOffice"
+                }
+            ]
+        },
+		"DrPoundsOffice": {
+            "title": "Dr. Pounds' Office",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/DrPoundsOffice.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 190.0,
+					"targetYaw": 260.0,
+                    "type": "scene",
+                    "text": "Hallway",
+                    "sceneId": "EndEntranceHall"
+                }
+            ]
+        },
+		"Lab204Back": {
+            "title": "Lab 204",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/Lab204Back.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 240.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "End Hallway",
+                    "sceneId": "EndEntranceHall"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 0.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Front of Lab 204",
+                    "sceneId": "Lab204Front"
+                }
+            ]
+        },
+		"Lab204Front": {
+            "title": "Lab 204",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/Lab204Front.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"targetYaw": 180.0,
+                    "type": "scene",
+                    "text": "Lab 204 back",
+                    "sceneId": "Lab204Back"
+                },
+            ]
+        },
+	 "LeftStairway": {
+            "title": "Stairway",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/LeftStairway.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 70.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "End Hallway",
+                    "sceneId": "EndEntranceHall"
+                },
+				{
+                    "pitch": -35.0,
+                    "yaw": 280.0,
+                    "type": "scene",
+                    "text": "Down",
+                    "sceneId": "MiddleLeftStairs"
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 254.0,
+                    "type": "scene",
+                    "text": "Up",
+                    "sceneId": "TopMiddleLeftStairs",
+                    "targetYaw": 90,
+                    "targetPitch": 2
+                },
+            ]
+        },
+		"MiddleLeftStairs": {
+            "title": "Stairway",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/MiddleLeftStairs.jpg",
+            "hotSpots": [
+                {
+                    "pitch": 20.0,
+                    "yaw": 70.0,
+					"targetYaw": 90.0,
+                    "type": "scene",
+                    "text": "Main Floor",
+                    "sceneId": "LeftStairway"
+                },
+				{
+                    "pitch": -30.0,
+                    "yaw": 100.0,
+					"targetYaw": 250.0,
+                    "type": "scene",
+                    "text": "First Floor",
+                    "sceneId": "FirstFloorStairs"
+                }
+            ]
+        },
+		"FirstFloorStairs": {
+            "title": "First Floor",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/FirstFloorStairs.jpg",
+            "hotSpots": [
+                {
+                    "pitch": 20.0,
+                    "yaw": 55.0,
+					"targetYaw": 55.0,
+                    "type": "scene",
+                    "text": "Stairway",
+                    "sceneId": "MiddleLeftStairs"
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 210.0,
+					"targetYaw": 270.0,
+                    "type": "scene",
+                    "text": "Hallway",
+                    "sceneId": "FirstFloorHallway"
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 335.0,
+					"targetYaw": 280.0,
+                    "type": "scene",
+                    "text": "BottomofOutsideStairs",
+                    "sceneId": "BottomofOutsideStairs"
+                }
+            ]
+        },
+		"FirstFloorHallway": {
+            "title": "Hallway",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/FirstFloorHallway.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 270.0,
+					"targetYaw": 90.0,
+                    "type": "scene",
+                    "text": "Middle Hallway",
+                    "sceneId": "FirstFloorMiddleHallway"
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 175.0,
+					"targetYaw": 270.0,
+                    "type": "scene",
+                    "text": "Lab 100",
+                    "sceneId": "Lab100Start"
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 90.0,
+					"targetYaw": 60.0,
+                    "type": "scene",
+                    "text": "Stairs",
+                    "sceneId": "FirstFloorStairs"
+                }
+            ]
+        },
+		"FirstFloorMiddleHallway": {
+            "title": "Middle Hallway",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/FirstFloorMiddleHallway.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 270.0,
+					"targetYaw": 90.0,
+                    "type": "scene",
+                    "text": "Hallway",
+                    "sceneId": "FirstFloorHallway"
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 180.0,
+					"targetYaw": 180.0,
+                    "type": "scene",
+                    "text": "Men's Bathroom",
+                    "sceneId": "MensBathroom"
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 90.0,
+					"targetYaw": 90.0,
+                    "type": "scene",
+                    "text": "End of Hallway",
+                    "sceneId": "FirstFloorEndHallway"
+                }
+            ]
+        },
+		"FirstFloorEndHallway": {
+            "title": "End of Hallway",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/FirstFloorEndHallway.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 270.0,
+					"targetYaw": 270.0,
+                    "type": "scene",
+                    "text": "Middle Hallway",
+                    "sceneId": "FirstFloorMiddleHallway"
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 170.0,
+					"targetYaw": 180.0,
+                    "type": "scene",
+                    "text": "Ladies' Bathroom",
+                    "sceneId": "LadiesBathroom"
+                },
+				
+            ]
+        },
+		"LadiesBathroom": {
+            "title": "Ladies' Bathroom",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/LadiesBathroom.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 320.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "End Hallway",
+                    "sceneId": "FirstFloorEndHallway"
+                },
+				
+            ]
+        },
+		"MensBathroom": {
+            "title": "Men's Bathroom",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/MensBathroom.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 0.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Middle Hallway",
+                    "sceneId": "FirstFloorMiddleHallway"
+                },
+				
+            ]
+        },
+		"Lab100Start": {
+            "title": "Lab 100",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/Lab100Start.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"targetYaw": 180.0,
+                    "type": "scene",
+                    "text": "Front of Lab 100",
+                    "sceneId": "Lab100Front"
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 0.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Back of Lab 100",
+                    "sceneId": "Lab100Back"
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 90.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Hallway",
+                    "sceneId": "FirstFloorHallway"
+                }
+            ]
+        },
+		"Lab100Front": {
+            "title": "Front of Lab 100",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/Lab100Front.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 0.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Middle of Lab 100",
+                    "sceneId": "Lab100Start"
+                },
+				
+            ]
+        },
+		"Lab100Back": {
+            "title": "Back of Lab 100",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/Lab100Back.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"targetYaw": 180.0,
+                    "type": "scene",
+                    "text": "Middle of Lab 100",
+                    "sceneId": "Lab100Start"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 320.0,
+					"targetYaw": 180.0,
+                    "type": "scene",
+                    "text": "Back Hall of Lab 100",
+                    "sceneId": "BackHallwayinLab100"
+                },
+				
+            ]
+        },
+		"BackHallwayinLab100": {
+            "title": "Back Hall of Lab 100",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/BackHallwayinLab100.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 0.0,
+					"targetYaw": 180.0,
+                    "type": "scene",
+                    "text": "Back of Lab 100",
+                    "sceneId": "Lab100Back"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"targetYaw": 270.0,
+                    "type": "scene",
+                    "text": "Back Door of Lab 100",
+                    "sceneId": "BackDoorinLab100"
+                },
+				
+            ]
+        },
+		"BackDoorinLab100": {
+            "title": "Back Door of Lab 100",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/BackDoorinLab100.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 70.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Back Hall of Lab 100",
+                    "sceneId": "BackHallwayinLab100"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"targetYaw": 320.0,
+                    "type": "scene",
+                    "text": "Outside of Lab 100",
+                    "sceneId": "OutsideLab100"
+                },
+				
+            ]
+        },
+		"OutsideLab100": {
+            "title": "Bottom of the Ramp",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/OutsideLab100.jpg",
+            "hotSpots": [
+                {
+                    "pitch": 2.0,
+                    "yaw": 325.0,
+					"targetYaw": 20.0,
+                    "type": "scene",
+                    "text": "Up the ramp",
+                    "sceneId": "RamptoLab100"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 200.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Back door",
+                    "sceneId": "BackDoorinLab100"
+                },
+				
+            ]
+        },
+		"RamptoLab100": {
+            "title": "Middle of the ramp",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/RamptoLab100.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -5.0,
+                    "yaw": 210.0,
+					"targetYaw": 180.0,
+                    "type": "scene",
+                    "text": "Bottom of the ramp",
+                    "sceneId": "OutsideLab100"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 30.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Top of the ramp",
+                    "sceneId": "TopofRamp"
+                },
+				
+            ]
+        },
+		"TopofRamp": {
+            "title": "Top of the ramp",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/TopofRamp.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -3.0,
+                    "yaw": 160.0,
+					"targetYaw": 200.0,
+                    "type": "scene",
+                    "text": "Down the ramp",
+                    "sceneId": "RamptoLab100"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 30.0,
+					"targetYaw": 270.0,
+                    "type": "scene",
+                    "text": "Around the Building",
+                    "sceneId": "BackLeftCorner"
+                },
+				
+            ]
+        },
+		"BackLeftCorner": {
+            "title": "Outside of Building",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/BackLeftCorner.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 270,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Down the sidewalk",
+                    "sceneId": "LeftofBuilding"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"targetYaw": 170.0,
+                    "type": "scene",
+                    "text": "Outside the building",
+                    "sceneId": "TopofRamp"
+                },
+				{
+					"pitch": -1.0,
+                    "yaw": 105.0,
+					"targetYaw": 90.0,
+                    "type": "scene",
+                    "text": "Back right corner",
+                    "sceneId": "BackRightCorner"
+				},
+            ]
+        },
+		"BackRightCorner": {
+			"title": "Back Right Corner",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/BackRightCorner.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 175.0,
+					"targetYaw": 270.0,
+                    "type": "scene",
+                    "text": "Back of the building",
+                    "sceneId": "BackLeftCorner",
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 100.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Front of the building",
+                    "sceneId": "BottomofFrontRamp"
+                },
+				
+            ]
+        },
+		"LeftofBuilding": {
+            "title": "Outside the building",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/LeftofBuilding.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"targetYaw": 100.0,
+                    "type": "scene",
+                    "text": "Back of the building",
+                    "sceneId": "BackLeftCorner",
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 315.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Outside the building",
+                    "sceneId": "LeftSidewalk"
+                },
+				
+            ]
+        },
+		"LeftSidewalk": {
+            "title": "Left of Building",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/LeftSidewalk.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"targetYaw": 200.0,
+                    "type": "scene",
+                    "text": "Back of the building",
+                    "sceneId": "LeftofBuilding"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 280.0,
+					"targetYaw": 180.0,
+                    "type": "scene",
+                    "text": "Secret Path",
+                    "sceneId": "SecretPath"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 360.0,
+					"targetYaw": 270.0,
+                    "type": "scene",
+                    "text": "Front Left Corner",
+                    "sceneId": "FrontLeftCorner"
+                },
+				
+            ]
+        },
+		"SecretPath": {
+            "title": "Secret Path",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/SecretPath.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 5.0,
+					"targetYaw": 180.0,
+                    "type": "scene",
+                    "text": "Left Sidewalk",
+                    "sceneId": "LeftSidewalk"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "OutsideNearStairs",
+                    "sceneId": "OutsideNearStairs"
+                },
+				
+            ]
+        },
+		"FrontLeftCorner": {
+            "title": "Front Left Corner",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/FrontLeftCorner.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 180.0,
+					"targetYaw": 180.0,
+                    "type": "scene",
+                    "text": "Sidewalk",
+                    "sceneId": "LeftSidewalk"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 265.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "OutsideNearStairs",
+                    "sceneId": "OutsideNearStairs"
+                },
+				
+            ]
+        },
+		"BottomofOutsideStairs": {
+            "title": "Bottom Outside Stairs",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/BottomofOutsideStairs.jpg",
+            "hotSpots": [
+                {
+                    "pitch": 10.0,
+                    "yaw": 20.0,
+                    "type": "scene",
+                    "text": "OutsideNearStairs",
+                    "sceneId": "OutsideNearStairs"
+                },
+				{
+                    "pitch": -1.0,
+                    "yaw": 120.0,
+					"targetYaw": 140.0,
+                    "type": "scene",
+                    "text": "Inside 1st Floor",
+                    "sceneId": "FirstFloorStairs"
+                },
+				
+            ]
+        },
+		
+    "LittleStairs": {
+            "title": "LittleStairs",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/littlestairs.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -25.0,
+                    "yaw": 350.0,
+                    "type": "scene",
+                    "text": "Lower Stairs",
+                    "sceneId": "LittleStairway",
+                    "targetYaw": 270.0,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": 25.0,
+                    "yaw": 15.0,
+                    "type": "scene",
+                    "text": "Top Stairs",
+                    "sceneId": "RightTopStairs",
+                    "targetYaw": 0.0,
+                    "targetPitch": 2
+                },
+ 		
+            ]
+        },
+		"RightTopStairs": {
+            "title": "Top of stairs",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/RightTopStairs.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -25.0,
+                    "yaw": 175.0,
+                    "type": "scene",
+                    "text": "Stairs",
+                    "sceneId": "LittleStairs",
+                    "targetYaw": -23,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 20.0,
+                    "type": "scene",
+                    "text": "Third Floor Hallway",
+                    "sceneId": "RightThirdFloor",
+                    "targetYaw": 180,
+                    "targetPitch": 2
+                },
+ 		
+            ]
+        },
+		"LeftStairsTop": {
+            "title": "Top of stairs",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/LeftStairsTop.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -45.0,
+                    "yaw": -77.5,
+                    "type": "scene",
+                    "text": "Stairs",
+                    "sceneId": "TopMiddleLeftStairs",
+                    "targetYaw": 90,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 80.0,
+                    "type": "scene",
+                    "text": "Third Floor Hallway",
+                    "sceneId": "LeftThirdFloor",
+                    "targetYaw": 90,
+                    "targetPitch": 2
+                },
+ 		
+            ]
+        },
+		"TopMiddleLeftStairs": {
+            "title": "Stairs",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/TopMiddleLeftStairs.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -40.0,
+                    "yaw": 100.0,
+                    "type": "scene",
+                    "text": "Down",
+                    "sceneId": "LeftStairway",
+                    "targetYaw": 80,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 74.0,
+                    "type": "scene",
+                    "text": "Top of stairs",
+                    "sceneId": "LeftStairsTop",
+                    "targetYaw": 90,
+                    "targetPitch": 2
+                },
+ 		
+            ]
+        },
+		"RightThirdFloor": {
+            "title": "Right side of third floor",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/RightThirdFloor.jpg",
+            "hotSpots": [
+				{
+                    "pitch": 0.0,
+                    "yaw": 355.0,
+                    "type": "scene",
+                    "text": "Stairs",
+                    "sceneId": "RightTopStairs",
+                    "targetYaw": 180.0,
+                    "targetPitch": -10
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 187.0,
+                    "type": "scene",
+                    "text": "Middle",
+                    "sceneId": "MiddleThirdFloor",
+                    "targetYaw": -90.0,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 290.0,
+                    "type": "scene",
+                    "text": "Lab 301",
+                    "sceneId": "Lab301",
+                    "targetYaw": 90.0,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 335.0,
+                    "type": "scene",
+                    "text": "Network Lab",
+                    "sceneId": "NetworkLab",
+                    "targetYaw": 180.0,
+                    "targetPitch": 2
+                },
+				{
+					"pitch": 0.0,
+                    "yaw": 126.0,
+                    "type": "scene",
+                    "text": "Lab 302",
+                    "sceneId": "Lab302",
+                    "targetYaw": 180.0,
+                    "targetPitch": 2
+				},
+            ]
+        },
+		"Lab302": {
+			"title": "Lab 306",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/Lab302.jpg",
+            "hotSpots": [
+				{
+                    "pitch": 0.0,
+                    "yaw": 10.0,
+                    "type": "scene",
+                    "text": "Hallway",
+                    "sceneId": "RightThirdFloor",
+                    "targetYaw": 270,
+                    "targetPitch": 2
+                },
+			]
+		},
+		
+		"BackLab306": {
+            "title": "Lab 306",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/BackLab306.jpg",
+            "hotSpots": [
+				{
+                    "pitch": 0.0,
+                    "yaw": 250.0,
+                    "type": "scene",
+                    "text": "Hallway",
+                    "sceneId": "LeftThirdFloor",
+                    "targetYaw": 90,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 0.0,
+                    "type": "scene",
+                    "text": "Front of Lab 306",
+                    "sceneId": "FrontLab306",
+                    "targetYaw": 0,
+                    "targetPitch": 2
+                },
+ 		
+            ]
+        },
+		"FrontLab306": {
+            "title": "Lab 306",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/FrontLab306.jpg",
+            "hotSpots": [
+				{
+                    "pitch": 0.0,
+                    "yaw": 180.0,
+                    "type": "scene",
+                    "text": "Back of Lab 306",
+                    "sceneId": "BackLab306",
+                    "targetYaw": 180.0,
+                    "targetPitch": 2
+                },
+ 		
+            ]
+        },
+		"LeftThirdFloor": {
+            "title": "Left side of third floor",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/LeftThirdFloor.jpg",
+            "hotSpots": [
+				{
+                    "pitch": 0.0,
+                    "yaw": -90.0,
+                    "type": "scene",
+                    "text": "Stairs",
+                    "sceneId": "LeftStairsTop",
+                    "targetYaw": -90,
+                    "targetPitch": -10
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 70.0,
+                    "type": "scene",
+                    "text": "Lab 305",
+                    "sceneId": "Lab305",
+                    "targetYaw": 270.0,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": -16.0,
+                    "yaw": 90.0,
+                    "type": "scene",
+                    "text": "Middle",
+                    "sceneId": "MiddleThirdFloor",
+                    "targetYaw": 90.0,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 0.0,
+                    "type": "scene",
+                    "text": "Lab 306",
+                    "sceneId": "BackLab306",
+                    "targetYaw": 90.0,
+                    "targetPitch": 2
+                }
+            ]
+        },
+		"MiddleThirdFloor": {
+            "title": "Middle of third floor",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/MiddleThirdFloor.jpg",
+            "hotSpots": [
+				{
+                    "pitch": -16.0,
+                    "yaw": 90.0,
+                    "type": "scene",
+                    "text": "Right",
+                    "sceneId": "RightThirdFloor",
+                    "targetYaw": -23,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 225.0,
+                    "type": "scene",
+                    "text": "Jesse's Office",
+                    "sceneId": "JesseOffice",
+                    "targetYaw": -23,
+                    "targetPitch": -10
+                },
+				{
+                    "pitch": -16.0,
+                    "yaw": 270.0,
+                    "type": "scene",
+                    "text": "Left",
+                    "sceneId": "LeftThirdFloor",
+                    "targetYaw": -35,
+                    "targetPitch": -10
+                }
+ 		
+            ]
+        },
+		"Lab305": {
+            "title": "Lab 305",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/Lab305.jpg",
+            "hotSpots": [
+				{
+                    "pitch": 0.0,
+                    "yaw": 125.0,
+                    "type": "scene",
+                    "text": "Hallway",
+                    "sceneId": "LeftThirdFloor",
+                    "targetYaw": 90,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 315.0,
+                    "type": "scene",
+                    "text": "Lounge Area",
+                    "sceneId": "LoungeArea",
+                    "targetYaw": 270.0,
+                    "targetPitch": 2
+                },
+ 		
+            ]
+        },
+		"LoungeArea": {
+            "title": "Lounge",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/LoungeArea.jpg",
+            "hotSpots": [
+				{
+                    "pitch": 0.0,
+                    "yaw": 130.0,
+                    "type": "scene",
+                    "text": "Lab 305",
+                    "sceneId": "Lab305",
+                    "targetYaw": 90,
+                    "targetPitch": 2
+                },
+ 		
+            ]
+        },
+		"JesseOffice": {
+            "title": "Jesse's Office",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/JesseOffice.jpg",
+            "hotSpots": [
+				{
+                    "pitch": 0.0,
+                    "yaw": 145.0,
+                    "type": "scene",
+                    "text": "Middle Hallway",
+                    "sceneId": "MiddleThirdFloor",
+                    "targetYaw": 0,
+                    "targetPitch": 2
+                },
+ 		
+            ]
+        },
+		"NetworkLab": {
+            "title": "Network Lab",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/NetworkLab.jpg",
+            "hotSpots": [
+				{
+                    "pitch": 0.0,
+                    "yaw": 52.0,
+                    "type": "scene",
+                    "text": "Hallway",
+                    "sceneId": "RightThirdFloor",
+                    "targetYaw": 180,
+                    "targetPitch": 2
+                },
+ 		
+            ]
+        },
+		"Lab301": {
+            "title": "Lab 301",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/Lab301.jpg",
+            "hotSpots": [
+				{
+                    "pitch": 0.0,
+                    "yaw": 250.0,
+                    "type": "scene",
+                    "text": "Hallway",
+                    "sceneId": "RightThirdFloor",
+                    "targetYaw": 90,
+                    "targetPitch": 2
+                },
+ 		
+            ]
+        },
+
+	"Lab200": {
+            "title": "Lab 200",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/Lab200.jpg",
+            "hotSpots": [
+                {
+                    "pitch": 0.0,
+                    "yaw": 235.0,
+                    "type": "scene",
+                    "text": "Stairs",
+                    "sceneId": "LittleStairway",
+                    "targetYaw": 180,
+                    "targetPitch": 2
+                },
+            ]
+        },
+
+    "LittleStairway": {
+            "title": "LittleStairway",
+            "hfov": 110,
+            "yaw": 90,
+            "type": "equirectangular",
+            "panorama": "/images/LittleStairway.jpg",
+            "hotSpots": [
+                {
+                    "pitch": 10.0,
+                    "yaw": 95.0,
+                    "type": "scene",
+                    "text": "Stairs",
+                    "sceneId": "LittleStairs",
+                    "targetYaw": -23,
+                    "targetPitch": 2
+                },
+ 		{
+                    "pitch": -8.0,
+                    "yaw": 0.0,
+                    "type": "scene",
+                    "text": "Lab 200",
+                    "sceneId": "Lab200",
+                    "targetYaw": 0,
+                    "targetPitch": 2
+                },
+		{
+                    "pitch": 0.0,
+                    "yaw": 185.0,
+                    "type": "scene",
+                    "text": "Leave Building",
+                    "sceneId": "OutsideDoorRamp",
+                    "targetYaw": 30,
+                    "targetPitch": 2
+                },
+		{
+                    "pitch": 0.0,
+                    "yaw": 300.0,
+                    "type": "scene",
+                    "text": "Main Entrance",
+                    "sceneId": "Entrance",
+                    "targetYaw": -10,
+                    "targetPitch": 2
+                },
+            ]
+        },
+		"OutsideDoorRamp": {
+            "title": "Outside Building",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/OutsideDoorRamp.jpg",
+            "hotSpots": [
+				{
+                    "pitch": 0.0,
+                    "yaw": 180.0,
+                    "type": "scene",
+                    "text": "Inside the building",
+                    "sceneId": "LittleStairway",
+                    "targetYaw": 0,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 285.0,
+                    "type": "scene",
+                    "text": "BottomofFrontRamp",
+                    "sceneId": "BottomofFrontRamp",
+                    "targetYaw": 180,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": -15.0,
+                    "yaw": 30.0,
+                    "type": "scene",
+                    "text": "RightofMainEntrance",
+                    "sceneId": "RightofMainEntrance",
+                    "targetYaw": 0,
+                    "targetPitch": 2
+                },
+ 		
+            ]
+        },
+
+        "CSOfficeEnd": {
+            "title": "CSB Offices",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/CSOfficeEnd.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -38.0,
+                    "yaw": 157.0,
+                    "type": "scene",
+                    "text": "CS Offices Middle",
+                    "sceneId": "CSOfficeMiddle",
+                    "targetYaw": 180,
+                    "targetPitch": 2
+                },
+
+		{
+                    "pitch": 0.0,
+                    "yaw": 55.0,
+                    "type": "scene",
+                    "text": "Dr. Allen's Office",
+                    "sceneId": "AllenOffice",
+                    "targetYaw": -23,
+                    "targetPitch": 2
+                },
+		
+		{
+                    "pitch": 0.0,
+                    "yaw": 5.0,
+                    "type": "scene",
+                    "text": "Storage Room",
+                    "sceneId": "StorageRoom",
+                    "targetYaw": 270,
+                    "targetPitch": 2
+                }
+
+            ]
+        },
+
+	"CSOfficeMiddle": {
+            "title": "CSB Offices Middle",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/CSOfficeMiddle.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -18.0,
+                    "yaw": 5.0,
+                    "type": "scene",
+                    "text": "CS Office End",
+                    "sceneId": "CSOfficeEnd",
+                    "targetYaw": 0,
+                    "targetPitch": 2
+                },
+
+				{
+                    "pitch": -22.0,
+                    "yaw": 170.0,
+                    "type": "scene",
+                    "text": "CS Office Start",
+                    "sceneId": "CSOfficeStart",
+                    "targetYaw": 180,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": 0.0,
+                    "yaw": 60.0,
+                    "type": "scene",
+                    "text": "Dr. Zhao's Office",
+                    "sceneId": "DrZhaoOffice",
+                    "targetYaw": 90,
+                    "targetPitch": 2
+                }
+            ]
+        },
+		"DrZhaoOffice": {
+            "title": "Dr. Zhao's Office",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/DrZhaoOffice.jpg",
+            "hotSpots": [
+				{
+                    "pitch": 0.0,
+                    "yaw": 240.0,
+                    "type": "scene",
+                    "text": "CS Office Middle",
+                    "sceneId": "CSOfficeMiddle",
+                    "targetYaw": 270,
+                    "targetPitch": 2
+                },
+ 		
+            ]
+        },
+
+	"CSOfficeStart": {
+            "title": "CSB Offices Start",
+            "hfov": 110,
+            "yaw": 5,
+            "type": "equirectangular",
+            "panorama": "/images/CSOfficeStart.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -0.6,
+                    "yaw": 270.0,
+                    "type": "scene",
+                    "text": "Entrance",
+                    "sceneId": "Entrance",
+                    "targetYaw": 270,
+                    "targetPitch": 2
+                },
+            
+                {
+                    "pitch": -25.0,
+                    "yaw": 20.0,
+                    "type": "scene",
+                    "text": "CS Office Middle",
+                    "sceneId": "CSOfficeMiddle",
+                    "targetYaw": 0,
+                    "targetPitch": 2
+                },
+
+				{
+                    "pitch": -5,
+                    "yaw": 155.0,
+                    "type": "scene",
+                    "text": "Conference Room",
+                    "sceneId": "ConferenceRoom",
+                    "targetYaw": 180,
+                    "targetPitch": 2
+                },
+		
+
+				{
+                    "pitch": -5,
+                    "yaw": 60.0,
+                    "type": "scene",
+                    "text": "Break Room",
+                    "sceneId": "BreakRoom",
+                    "targetYaw": 0,
+                    "targetPitch": 2
+                },
+				{
+                    "pitch": -5,
+                    "yaw": 95.0,
+                    "type": "scene",
+                    "text": "Dr. Digh's Office",
+                    "sceneId": "DighOffice",
+                    "targetYaw": 0,
+                    "targetPitch": 2
+                }
+            ]
+        },
+	"DighOffice": {
+            "title": "Dr. Digh's Office",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/DighOffice.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 212.0,
+					"targetYaw": 270.0,
+                    "type": "scene",
+                    "text": "CSB Office Start",
+                    "sceneId": "CSOfficeStart"
+                }
+            ]
+        },
+	"AllenOffice": {
+            "title": "Dr. Allen's Office",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/AllenOffice.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -1.0,
+                    "yaw": 150.0,
+					"targetYaw": 270.0,
+                    "type": "scene",
+                    "text": "CSB Office End",
+                    "sceneId": "CSOfficeEnd"
+                }
+            ]
+        },
+
+	"ConferenceRoom": {
+            "title": "Conference Room",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/ConferenceRoom.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -10.0,
+                    "yaw": 10.0,
+                    "type": "scene",
+                    "text": "CSB Office Start",
+                    "sceneId": "CSOfficeStart"
+                },
+				{
+                    "pitch": -10.0,
+                    "yaw": 160.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Dr. Cozart's Office",
+                    "sceneId": "DrCozartOffice"
+                }
+            ]
+        },
+		"DrCozartOffice": {
+            "title": "Dr. Cozart's Office",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/DrCozartOffice.jpg",
+            "hotSpots": [
+                {
+                    "pitch": 0.0,
+                    "yaw": 195.0,
+					"targetYaw": 0.0,
+                    "type": "scene",
+                    "text": "Conference Room",
+                    "sceneId": "ConferenceRoom"
+                }
+            ]
+        },
+	"BreakRoom": {
+            "title": "Break Room",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/BreakRoom.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -30.0,
+                    "yaw": 175.0,
+					"targetYaw": 270.0,
+                    "type": "scene",
+                    "text": "CSB Office Start",
+                    "sceneId": "CSOfficeStart"
+                }
+            ]
+        },
+
+	
+	"StorageRoom": {
+            "title": "Storage Room",
+            "hfov": 110,
+            "pitch": -3,
+            "yaw": 117,
+            "type": "equirectangular",
+            "panorama": "/images/StorageRoom.jpg",
+            "hotSpots": [
+                {
+                    "pitch": -5.0,
+                    "yaw": 65.0,
+					"targetYaw": 180.0,
+                    "type": "scene",
+                    "text": "CSB Office End",
+                    "sceneId": "CSOfficeEnd"
+                }
+            ]
+        }
+
+	
+    }
+});
+</script>
+
+</body>
+</html>
+</html>
